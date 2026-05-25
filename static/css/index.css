@@ -749,19 +749,15 @@ a:focus {
   }
 }
 
-
 .venue-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 8px 4px;
-  padding: 0.75rem 1.25rem;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #4f6df5, #6f86ff);
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: var(--primary-color);
   color: #ffffff;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   letter-spacing: 0.4px;
-  box-shadow: 0 4px 14px rgba(79, 109, 245, 0.22);
-  vertical-align: middle;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.22);
 }
