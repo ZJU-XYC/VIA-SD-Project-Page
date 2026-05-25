@@ -753,8 +753,8 @@ a:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 8px;
+  margin-top: 5px;
+  margin-bottom: 2px;
   padding: 15px 44px;
   min-width: 210px;
   border-radius: 999px;
@@ -768,5 +768,5 @@ a:focus {
 }
 
 .publication-links {
-  margin-top: 0.4rem;
+  margin-top: 0.2rem;
 }
