@@ -49,7 +49,7 @@
   <meta name="twitter:description" content="VIA-SD accelerates LLM inference by adding a routed slim verifier, turning binary speculative decoding into staged verification with fewer rejections.">
   <!-- TODO: Same as social preview image above -->
   <!-- <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png"> -->
-  <meta name="twitter:image:alt" content="VIA-SD - Research Preview">
+  <meta name="twitter:image:alt" content="VIA-SD - ICML 2026">
 
   <!-- Academic/Research Specific -->
   <meta name="citation_title" content="VIA-SD: Verification via Intra-Model Routing for Speculative Decoding">
@@ -60,7 +60,7 @@
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="International Conference on Machine Learning">
   <!-- TODO: FIX the PDF URL -->
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
+  <!-- <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf"> -->
   
   
   <!-- Additional SEO -->
@@ -78,7 +78,7 @@
 
 
   <!-- TODO: Replace with your paper title and authors -->
-  <title>VIA-SD: Verification via Intra-Model Routing for Speculative Decoding - Yuchen Xian et al. | Academic Research</title>
+  <title><title>VIA-SD: Verification via Intra-Model Routing for Speculative Decoding | ICML 2026</title></title>
   
   <!-- Favicon and App Icons -->
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
@@ -118,69 +118,103 @@
   {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
+    "headline": "VIA-SD: Verification via Intra-Model Routing for Speculative Decoding",
+    "description": "VIA-SD accelerates large language model inference by introducing a routed slim verifier into speculative decoding, enabling staged verification with fewer rejections and reduced full-model calls.",
     "author": [
       {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
+      "@type": "Person",
+      "name": "Yuchen Xian",
+      "affiliation": [
+        {
           "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
+          "name": "Zhejiang University"
+        },
+        {
           "@type": "Organization",
-          "name": "INSTITUTION_NAME"
+          "name": "Nanyang Technological University"
         }
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Yang He",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Agency for Science, Technology and Research, Singapore"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Yunqiu Xu",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Zhejiang University"
+        },
+        {
+          "@type": "Organization",
+          "name": "National University of Singapore"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Yi Yang",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Zhejiang University"
       }
-    ],
-    "datePublished": "2024-01-01",
+    }
+  ],
+    "datePublished": "2026-07-10",
     "publisher": {
       "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
+      "name": "International Conference on Machine Learning"
     },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
+    "url": "https://ZJU-XYC.github.io/VIA-SD-Project-Page/",
+    "image": "https://ZJU-XYC.github.io/VIA-SD-Project-Page/static/images/social_preview.png",
+    "keywords": ["LLM inference acceleration", "speculative decoding", "intra-model routing", "hierarchical verification"],
+    "abstract": "Speculative decoding reduces the inference cost of large language models by using lightweight drafters to propose candidates and large verifiers to validate them. VIA-SD introduces a routed slim verifier derived through intra-model routing, enabling hierarchical verification for high-, medium-, and low-confidence tokens. This multi-tier design reduces rejection rates and full-model invocations while remaining compatible with existing speculative decoding frameworks.",
+    "citation": "@inproceedings{xian2026viasd, title={VIA-SD: Verification via Intra-Model Routing for Speculative Decoding}, author={Xian, Yuchen and He, Yang and Xu, Yunqiu and Yang, Yi}, booktitle={International Conference on Machine Learning}, year={2026}}",
     "isAccessibleForFree": true,
     "license": "https://creativecommons.org/licenses/by/4.0/",
     "mainEntity": {
       "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+      "@id": "https://ZJU-XYC.github.io/VIA-SD-Project-Page/"
     },
     "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
+    {
+      "@type": "Thing",
+      "name": "Speculative Decoding"
+    },
+    {
+      "@type": "Thing",
+      "name": "Efficient Large Language Model Inference"
+    },
+    {
+      "@type": "Thing",
+      "name": "Intra-Model Routing"
+    }
+  ]
   }
   </script>
   
   <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
-  }
-  </script>
+  <!-- <script type="application/ld+json"> -->
+  <!-- { -->
+    <!-- "@context": "https://schema.org", -->
+    <!-- "@type": "Organization", -->
+    <!-- "name": "INSTITUTION_OR_LAB_NAME", -->
+    <!-- "url": "https://YOUR_INSTITUTION_WEBSITE.com", -->
+    <!-- "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico", -->
+    <!-- "sameAs": [ -->
+      <!-- "https://twitter.com/YOUR_TWITTER_HANDLE", -->
+      <!-- "https://github.com/YOUR_GITHUB_USERNAME" -->
+    <!-- ] -->
+  <!-- } -->
+  <!-- </script> -->
 </head>
 <body>
 
@@ -191,52 +225,52 @@
   </button>
 
   <!-- More Works Dropdown -->
-  <div class="more-works-container">
-    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
-      <i class="fas fa-flask"></i>
-      More Works
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
-    </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4>More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="works-list">
+  <!-- <div class="more-works-container"> -->
+    <!-- <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab"> -->
+      <!-- <i class="fas fa-flask"></i> -->
+      <!-- More Works -->
+      <!-- <i class="fas fa-chevron-down dropdown-arrow"></i> -->
+    <!-- </button> -->
+    <!-- <div class="more-works-dropdown" id="moreWorksDropdown"> -->
+      <!-- <div class="dropdown-header"> -->
+        <!-- <h4>More Works from Our Lab</h4> -->
+        <!-- <button class="close-btn" onclick="toggleMoreWorks()"> -->
+          <!-- <i class="fas fa-times"></i> -->
+        <!-- </button> -->
+      <!-- </div> -->
+      <!-- <div class="works-list"> -->
         <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
-          <div class="work-info">
+        <!-- <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank"> -->
+          <!-- <div class="work-info"> -->
             <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
+            <!-- <h5>Paper Title 1</h5> -->
             <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
+            <!-- <p>Brief description of the work and its main contribution.</p> -->
             <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
+            <!-- <span class="work-venue">Conference/Journal 2024</span> -->
+          <!-- </div> -->
+          <!-- <i class="fas fa-external-link-alt"></i> -->
+        <!-- </a> -->
         <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+        <!-- <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank"> -->
+          <!-- <div class="work-info"> -->
+            <!-- <h5>Paper Title 2</h5> -->
+            <!-- <p>Brief description of the work and its main contribution.</p> -->
+            <!-- <span class="work-venue">Conference/Journal 2023</span> -->
+          <!-- </div> -->
+          <!-- <i class="fas fa-external-link-alt"></i> -->
+        <!-- </a> -->
+        <!-- <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank"> -->
+          <!-- <div class="work-info"> -->
+            <!-- <h5>Paper Title 3</h5> -->
+            <!-- <p>Brief description of the work and its main contribution.</p> -->
+            <!-- <span class="work-venue">Conference/Journal 2023</span> -->
+          <!-- </div> -->
+          <!-- <i class="fas fa-external-link-alt"></i> -->
+        <!-- </a> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
 
   <main id="main-content">
   <section class="hero">
@@ -245,23 +279,30 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
+            <h1 class="title is-1 publication-title">VIA-SD: Verification via Intra-Model Routing for Speculative Decoding</h1>
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=xbJB0mQAAAAJ" target="_blank">Yuchen Xian</a><sup>1,2</sup>,</span>
                 <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
+                  <a href="https://scholar.google.com/citations?hl=zh-CN&user=vvnFsIIAAAAJ" target="_blank">Yang He</a><sup>3,4</sup>,</span>
                   <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
+                    <a href="https://scholar.google.com/citations?hl=zh-CN&user=SdJX4nAAAAAJ" target="_blank">Yunqiu Xu</a><sup>1,5</sup>,</span>
+                    <span class="author-block">
+                      <a href="https://scholar.google.com/citations?hl=zh-CN&user=RMSuNFwAAAAJ" target="_blank">Yi Yang</a><sup>1,*</sup>1</span>
                   </span>
                   </div>
 
                   <div class="is-size-5 publication-authors">
                     <!-- TODO: Replace with your institution and conference/journal info -->
                     <span class="author-block">Institution Name<br>Conference name and year</span>
+                    <sup>1</sup>ReLER Lab, CCAI, Zhejiang University&nbsp;&nbsp;
+                    <sup>2</sup>CCDS, Nanyang Technological University<br>
+                    <sup>3</sup>CFAR, Agency for Science, Technology and Research, Singapore&nbsp;&nbsp;
+                    <sup>4</sup>IHPC, Agency for Science, Technology and Research, Singapore<br>
+                    <sup>5</sup>National University of Singapore
                     <!-- TODO: Remove this line if no equal contribution -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Corresponding Author</small></span>
                   </div>
 
                   <div class="column has-text-centered">
