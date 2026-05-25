@@ -753,14 +753,16 @@ a:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 22px;
-  margin-bottom: 10px;
-  padding: 11px 30px;
+  margin-top: 28px;
+  margin-bottom: 16px;
+  padding: 17px 52px;
+  min-width: 240px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #4f6df5, #6f86ff);
+  background: linear-gradient(135deg, #2563eb 0%, #6d7cff 100%);
   color: #ffffff;
-  font-weight: 800;
-  font-size: 1.18rem;
-  letter-spacing: 0.8px;
-  box-shadow: 0 8px 22px rgba(79, 109, 245, 0.28);
+  font-weight: 850;
+  font-size: 1.6rem;
+  line-height: 1;
+  letter-spacing: 1.1px;
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.32);
 }
