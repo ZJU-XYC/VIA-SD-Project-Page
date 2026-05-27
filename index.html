@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="VIA-SD: Verification via Intra-Model Routing for Speculative Decoding - Yuchen Xian et al.">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="VIA-SD accelerates LLM inference by adding a routed slim verifier, turning binary speculative decoding into staged verification with fewer rejections.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="LLM inference acceleration, speculative decoding, intra-model routing, hierarchical verification">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Yuchen Xian, Yang He, Yunqiu Xu, Yi Yang">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="Zhejiang University ReLER Lab">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="VIA-SD: Verification via Intra-Model Routing for Speculative Decoding">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="VIA-SD accelerates LLM inference by adding a routed slim verifier, turning binary speculative decoding into staged verification with fewer rejections.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://ZJU-XYC.github.io/VIA-SD-Project-Page/">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <!-- <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png"> -->
+  <!-- <meta property="og:image:width" content="1200"> -->
+  <!-- <meta property="og:image:height" content="630"> -->
+  <!-- <meta property="og:image:alt" content="PAPER_TITLE - Research Preview"> -->
+  <!-- <meta property="article:published_time" content="2024-01-01T00:00:00.000Z"> -->
+  <!-- <meta property="article:author" content="FIRST_AUTHOR_NAME"> -->
+  <!-- <meta property="article:section" content="Research"> -->
+  <!-- <meta property="article:tag" content="KEYWORD1"> -->
+  <!-- <meta property="article:tag" content="KEYWORD2"> -->
+
+  <!-- Twitter -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <!-- <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE"> -->
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <!-- <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE"> -->
+  <!-- TODO: Same as paper title above -->
+  <meta name="twitter:title" content="VIA-SD: Verification via Intra-Model Routing for Speculative Decoding">
+  <!-- TODO: Same as description above -->
+  <meta name="twitter:description" content="VIA-SD accelerates LLM inference by adding a routed slim verifier, turning binary speculative decoding into staged verification with fewer rejections.">
+  <!-- TODO: Same as social preview image above -->
+  <!-- <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png"> -->
+  <meta name="twitter:image:alt" content="VIA-SD - ICML 2026">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="VIA-SD: Verification via Intra-Model Routing for Speculative Decoding">
+  <meta name="citation_author" content="Xian, Yuchen">
+  <meta name="citation_author" content="He, Yang">
+  <meta name="citation_author" content="Xu, Yunqiu">
+  <meta name="citation_author" content="Yang, Yi">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="International Conference on Machine Learning">
+  <!-- TODO: FIX the PDF URL -->
+  <!-- <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf"> -->
+  
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>VIA-SD: Verification via Intra-Model Routing for Speculative Decoding | ICML 2026</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "VIA-SD: Verification via Intra-Model Routing for Speculative Decoding",
+    "description": "VIA-SD accelerates large language model inference by introducing a routed slim verifier into speculative decoding, enabling staged verification with fewer rejections and reduced full-model calls.",
+    "author": [
+      {
+      "@type": "Person",
+      "name": "Yuchen Xian",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Zhejiang University"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Yang He",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Agency for Science, Technology and Research, Singapore"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Yunqiu Xu",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "National University of Singapore"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Yi Yang",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Zhejiang University"
+      }
+    }
+  ],
+    "datePublished": "2026-07-10",
+    "publisher": {
+      "@type": "Organization",
+      "name": "International Conference on Machine Learning"
+    },
+    "url": "https://ZJU-XYC.github.io/VIA-SD-Project-Page/",
+    "image": "https://ZJU-XYC.github.io/VIA-SD-Project-Page/static/images/social_preview.png",
+    "keywords": ["LLM inference acceleration", "speculative decoding", "intra-model routing", "hierarchical verification"],
+    "abstract": "Speculative decoding (SD) addresses the high inference costs of large language models (LLMs) by having lightweight drafters generate candidates for large verifiers to validate in parallel. Existing draft-verify methods use binary decisions: accept or fully recompute. Yet we find that many rejected tokens can be verified correctly by a slim submodel derived from the full verifier via intra-model routing, instead of the full verifier. This motivates our slim-verifier to handle tokens requiring moderate verification resources, reducing expensive large-model calls. We propose Verification via Intra-Model Routing for Speculative Decoding (VIA-SD), a multi-tier framework using a routed slim-verifier. Draft tokens are processed hierarchically: direct acceptance for high-confidence cases, slim-verifier regeneration for medium-confidence cases, and full-model verification for uncertain cases. Across four typical tasks and multiple model families, VIA-SD consistently lowers rejection rates (0.1–0.22) and achieves 10–20% speedup over state-of-the-art SD methods. Compared to decoding without drafting, VIA-SD provides 2.5–3&times; acceleration while improving output quality. Moreover, VIA-SD is compatible with existing SD frameworks without modifying their training procedures. Our results suggest multi-tier SD as a general paradigm for scalable and efficient LLM inference.",
+    "citation": "@inproceedings{xian2026viasd, title={VIA-SD: Verification via Intra-Model Routing for Speculative Decoding}, author={Xian, Yuchen and He, Yang and Xu, Yunqiu and Yang, Yi}, booktitle={International Conference on Machine Learning}, year={2026}}",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://ZJU-XYC.github.io/VIA-SD-Project-Page/"
+    },
+    "about": [
+    {
+      "@type": "Thing",
+      "name": "Speculative Decoding"
+    },
+    {
+      "@type": "Thing",
+      "name": "Efficient Large Language Model Inference"
+    },
+    {
+      "@type": "Thing",
+      "name": "Intra-Model Routing"
+    }
+  ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <!-- <script type="application/ld+json"> -->
+  <!-- { -->
+    <!-- "@context": "https://schema.org", -->
+    <!-- "@type": "Organization", -->
+    <!-- "name": "INSTITUTION_OR_LAB_NAME", -->
+    <!-- "url": "https://YOUR_INSTITUTION_WEBSITE.com", -->
+    <!-- "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico", -->
+    <!-- "sameAs": [ -->
+      <!-- "https://twitter.com/YOUR_TWITTER_HANDLE", -->
+      <!-- "https://github.com/YOUR_GITHUB_USERNAME" -->
+    <!-- ] -->
+  <!-- } -->
+  <!-- </script> -->
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <!-- <div class="more-works-container"> -->
+    <!-- <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab"> -->
+      <!-- <i class="fas fa-flask"></i> -->
+      <!-- More Works -->
+      <!-- <i class="fas fa-chevron-down dropdown-arrow"></i> -->
+    <!-- </button> -->
+    <!-- <div class="more-works-dropdown" id="moreWorksDropdown"> -->
+      <!-- <div class="dropdown-header"> -->
+        <!-- <h4>More Works from Our Lab</h4> -->
+        <!-- <button class="close-btn" onclick="toggleMoreWorks()"> -->
+          <!-- <i class="fas fa-times"></i> -->
+        <!-- </button> -->
+      <!-- </div> -->
+      <!-- <div class="works-list"> -->
+        <!-- TODO: Replace with your lab's related works -->
+        <!-- <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank"> -->
+          <!-- <div class="work-info"> -->
+            <!-- TODO: Replace with actual paper title -->
+            <!-- <h5>Paper Title 1</h5> -->
+            <!-- TODO: Replace with brief description -->
+            <!-- <p>Brief description of the work and its main contribution.</p> -->
+            <!-- TODO: Replace with venue and year -->
+            <!-- <span class="work-venue">Conference/Journal 2024</span> -->
+          <!-- </div> -->
+          <!-- <i class="fas fa-external-link-alt"></i> -->
+        <!-- </a> -->
+        <!-- TODO: Add more related works or remove extra items -->
+        <!-- <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank"> -->
+          <!-- <div class="work-info"> -->
+            <!-- <h5>Paper Title 2</h5> -->
+            <!-- <p>Brief description of the work and its main contribution.</p> -->
+            <!-- <span class="work-venue">Conference/Journal 2023</span> -->
+          <!-- </div> -->
+          <!-- <i class="fas fa-external-link-alt"></i> -->
+        <!-- </a> -->
+        <!-- <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank"> -->
+          <!-- <div class="work-info"> -->
+            <!-- <h5>Paper Title 3</h5> -->
+            <!-- <p>Brief description of the work and its main contribution.</p> -->
+            <!-- <span class="work-venue">Conference/Journal 2023</span> -->
+          <!-- </div> -->
+          <!-- <i class="fas fa-external-link-alt"></i> -->
+        <!-- </a> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title">VIA-SD: Verification via Intra-Model Routing for Speculative Decoding</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=xbJB0mQAAAAJ" target="_blank">Yuchen Xian</a><sup>1,2</sup>,</span>
+                <span class="author-block">
+                  <a href="https://scholar.google.com/citations?hl=zh-CN&user=vvnFsIIAAAAJ" target="_blank">Yang He</a><sup>3,4</sup>,</span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?hl=zh-CN&user=SdJX4nAAAAAJ" target="_blank">Yunqiu Xu</a><sup>5</sup>,</span>
+                    <span class="author-block">
+                      <a href="https://scholar.google.com/citations?hl=zh-CN&user=RMSuNFwAAAAJ" target="_blank">Yi Yang</a><sup>1,2,*</sup></span>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <!-- TODO: Replace with your institution and conference/journal info -->
+                    <span class="author-block">
+                    <sup>1</sup>ReLER, The State Key Lab of Brain Machine Intelligence, Zhejiang University<br>
+                    <sup>2</sup>College of Artificial Intelligence, Zhejiang University<br>
+                    <sup>3</sup>CFAR, Agency for Science, Technology and Research, Singapore<br>
+                    <sup>4</sup>IHPC, Agency for Science, Technology and Research, Singapore<br>
+                    <sup>5</sup>National University of Singapore
+                    <!-- TODO: Remove this line if no equal contribution -->
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Corresponding Author</small></span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <!-- <span class="author-block">
+                      Proceedings of the 43rd International Conference on Machine Learning
+                    </span>
+                    <br> -->
+                    <span class="venue-badge">ICML 2026</span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="#" onclick="return false;"
+                        class="external-link button is-normal is-rounded is-dark" style="opacity:0.6;cursor:default;">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper (Coming Soon)</span>
+                      </a>
+                    </span>
+
+                  <span class="link-block">
+                    <a href="#" onclick="return false;"
+                    class="external-link button is-normal is-rounded is-dark" style="opacity:0.6;cursor:default;">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#" onclick="return false;"
+                  class="external-link button is-normal is-rounded is-dark" style="opacity:0.6;cursor:default;">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (Coming Soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<!-- <section class="hero teaser"> -->
+  <!-- <div class="container is-max-desktop"> -->
+    <!-- <div class="hero-body"> -->
+      <!-- TODO: Replace with your teaser video -->
+      <!-- <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata"> -->
+        <!-- TODO: Add your video file path here -->
+        <!-- <source src="static/videos/banner_video.mp4" type="video/mp4"> -->
+      <!-- </video> -->
+      <!-- TODO: Replace with your video description -->
+      <!-- <h2 class="subtitle has-text-centered"> -->
+        <!-- Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus.  -->
+      <!-- </h2> -->
+    <!-- </div> -->
+  <!-- </div> -->
+<!-- </section> -->
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Speculative decoding (SD) addresses the high inference costs of large language models (LLMs) by having lightweight drafters generate candidates for large verifiers to validate in parallel. Existing draft-verify methods use binary decisions: accept or fully recompute. Yet we find that many rejected tokens can be verified correctly by a slim submodel derived from the full verifier via intra-model routing, instead of the full verifier. This motivates our slim-verifier to handle tokens requiring moderate verification resources, reducing expensive large-model calls. We propose <strong>V</strong>erification via <strong>I</strong>ntr<strong>a</strong>-Model Routing for <strong>S</strong>peculative <strong>D</strong>ecoding (VIA-SD), a multi-tier framework using a routed slim-verifier. Draft tokens are processed hierarchically: direct acceptance for high-confidence cases, slim-verifier regeneration for medium-confidence cases, and full-model verification for uncertain cases. Across four typical tasks and multiple model families, VIA-SD consistently lowers rejection rates (0.1–0.22) and achieves 10–20% speedup over state-of-the-art SD methods. Compared to decoding without drafting, VIA-SD provides 2.5–3&times; acceleration while improving output quality. Moreover, VIA-SD is compatible with existing SD frameworks without modifying their training procedures. Our results suggest multi-tier SD as a general paradigm for scalable and efficient LLM inference.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item" style="text-align:center;">
+        <img src="static/images/fig1.png" alt="Figure 1: Comparison of speculative decoding paradigms" loading="lazy" style="max-width:80%;max-height:360px;height:auto;object-fit:contain;"/>
+        <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+          <strong>Figure 1.</strong> Comparison of speculative decoding (SD) paradigms. Our VIA-SD introduces a slim-verifier routed from the large model to enable hierarchical verification with low overhead.
+        </h2>
+      </div>
+      <div class="item" style="text-align:center;">
+        <img src="static/images/fig3.png" alt="Figure 3: Illustration of VIA-SD pipeline" loading="lazy" style="max-width:80%;max-height:360px;height:auto;object-fit:contain;"/>
+        <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+          <strong>Figure 3.</strong> Illustration of our proposed VIA-SD pipeline. (a) Candidate tokens drafted by p are progressively verified by a hierarchy of intermediate verifiers, where high-confidence tokens are accepted early and only the remaining uncertain tokens are deferred to the full verifier q. (b) Latency comparison between two-tier and hierarchical multi-tier verification, showing reduced reliance on full-model decoding.
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<!-- End image carousel -->
+
+
+
+
+
+
+
+<!-- Video carousel -->
+<!-- <section class="hero is-small"> -->
+  <!-- <div class="hero-body"> -->
+    <!-- <div class="container"> -->
+      <!-- <h2 class="title is-3">Another Carousel</h2> -->
+      <!-- <div id="results-carousel" class="carousel results-carousel"> -->
+        <!-- <div class="item item-video1"> -->
+          <!-- TODO: Add poster image for better preview -->
+          <!-- <video poster="" id="video1" controls muted loop height="100%" preload="metadata"> -->
+            <!-- Your video file here -->
+            <!-- <source src="static/videos/carousel1.mp4" type="video/mp4"> -->
+          <!-- </video> -->
+        <!-- </div> -->
+        <!-- <div class="item item-video2"> -->
+          <!-- TODO: Add poster image for better preview -->
+          <!-- <video poster="" id="video2" controls muted loop height="100%" preload="metadata"> -->
+            <!-- Your video file here -->
+            <!-- <source src="static/videos/carousel2.mp4" type="video/mp4"> -->
+          <!-- </video> -->
+        <!-- </div> -->
+        <!-- <div class="item item-video3"> -->
+          <!-- TODO: Add poster image for better preview -->
+          <!-- <video poster="" id="video3" controls muted loop height="100%" preload="metadata"> -->
+            <!-- Your video file here -->
+            <!-- <source src="static/videos/carousel3.mp4" type="video/mp4"> -->
+          <!-- </video> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+<!-- </section> -->
+<!-- End video carousel -->
+
+
+
+
+
+
+<!-- Paper poster -->
+<!-- <section class="hero is-small is-light"> -->
+  <!-- <div class="hero-body"> -->
+    <!-- <div class="container"> -->
+      <!-- <h2 class="title">Poster</h2> -->
+
+      <!-- TODO: Replace with your poster PDF -->
+      <!-- <iframe  src="static/pdfs/sample.pdf" width="100%" height="550"> -->
+          <!-- </iframe> -->
+        
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </section> -->
+<!--End paper poster -->
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{xian2026viasd,
+  title     = {VIA-SD: Verification via Intra-Model Routing for Speculative Decoding},
+  author    = {Xian, Yuchen and He, Yang and Xu, Yunqiu and Yang, Yi},
+  booktitle = {Proceedings of the 43rd International Conference on Machine Learning},
+  year      = {2026}
+  }</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
